@@ -1,0 +1,38 @@
+@model IEnumerable<Lecture2.Models.Book>
+
+@{
+    ViewBag.Title = "Book index";
+    Layout = "_Layout";
+}
+
+<h2>Lista książek</h2>
+<a class="btn btn-primary" asp-action="Create">Dodaj nową książkę</a>
+<table class="table table-striped">
+    <thead>
+    <th>@Html.DisplayNameFor(model => model.Title)</th>
+    <th>@Html.DisplayNameFor(model => model.Category)</th>
+    <th></th>
+    </thead>
+    <tbody>
+        @foreach (var book in @Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Category</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@book.Id">Szczegóły</a>
+                    <a asp-action="Edit" asp-route-id="@book.Id">Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@book.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+        @* Zamiast kodu powyżej można użyć szablonu, który zawiera kod zawarty wewnatrz pętli*@
+        @* @foreach (var book in @Model) *@
+        @* { *@
+        @*     @Html.DisplayFor(m => book, "BookShort") *@
+        @* } *@
+    </tbody>
+    <tfoot>
+    
+    </tfoot>
+</table>

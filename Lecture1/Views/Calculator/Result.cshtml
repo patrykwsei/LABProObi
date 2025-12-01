@@ -1,0 +1,39 @@
+@model CalculatorViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div>
+    <div class="container border border-danger rounded-3 p-3 mb-3 w-50">
+        <h2>Kalkulator</h2>
+        <div>
+            @if (Model.Result is not null)
+            {
+                <h3>@Model.View</h3>
+            }
+        </div>
+    </div>
+    <div class="border border-primary p-3 rounded-3 w-50 m-auto">
+        <form asp-action="Result" asp-controller="Calculator"
+              method="get">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <input asp-for="X" class="form-control"/>
+                    <span class="text-danger" asp-validation-for="X"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <select asp-for="Operator" class="form-select" asp-items="@Html.GetEnumSelectList<Operators>()">
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <input asp-for="Y" class="form-control"/>
+                    <span class="text-danger" asp-validation-for="Y"></span>
+                </div>
+
+            </div>
+                <button class="btn btn-primary w-100">Oblicz</button>
+        </form>
+    </div>
+</div>

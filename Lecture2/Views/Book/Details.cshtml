@@ -1,0 +1,54 @@
+@model Lecture2.Models.Book
+@{
+    ViewBag.Title = "Book Details";
+    Layout = "_Layout";
+}
+
+<h2>Szczegóły książki</h2>
+
+<div>
+    <h4>@Html.DisplayNameForModel()</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pages)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pages)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublishingYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublishingYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+    </dl>
+</div>
+
+@* zamiast powyższego kodu można użyć szablonu *@
+@* @Html.DisplayForModel("BookSummary") *@
+
+<div>
+    @* HtmlHelper daje możliwość tworzenia linków do akcji  *@
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @* Tworzenie linków za pomocą tag helpera *@
+    <a asp-action="Index">Powrót do listy</a>
+</div>

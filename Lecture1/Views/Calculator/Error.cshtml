@@ -1,0 +1,10 @@
+@model string
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2 class="text-danger">Błąd kalkulatora</h2>
+<p class="text-bg-danger">@Model</p>
+<a asp-action="Result" asp-controller="Calculator">Powrót do kalkulatora</a>

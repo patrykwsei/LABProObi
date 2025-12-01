@@ -1,0 +1,17 @@
+@model Lecture2.Models.Book
+
+@{
+    ViewBag.Title = "Delete Book";
+    Layout = "_Layout";
+}
+
+<h2>Czy usunąć poniższą książkę?</h2>
+@* Wywołanie szablonu szczeghółów książki*@
+@Html.DisplayForModel("BookSummary")
+<form asp-action="Delete" method="post">
+    <div class="form-group">
+        <input asp-for="Id"/>
+        <input type="submit" value="Usuń" class="btn btn-primary"/>
+    </div>
+</form>
+

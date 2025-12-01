@@ -1,0 +1,26 @@
+GET http://localhost:5147/api/v1/books
+Accept: application/json
+###
+GET http://localhost:5147/api/v1/books/2
+Accept: application/json
+###
+POST http://localhost:5147/api/v1/books
+Content-Type: application/json
+
+{
+  "title": "New book",
+  "author": "New author"
+}
+###
+DELETE http://localhost:5147/api/v1/books/4
+Accept: application/json
+###
+PUT http://localhost:5147/api/v1/books/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title" : "changed title",
+  "author": "changed author"
+}
+

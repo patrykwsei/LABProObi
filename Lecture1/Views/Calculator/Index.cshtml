@@ -1,0 +1,22 @@
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Kalkulator</h2>
+<p>Przykład poprawnej realizacji kalkulatora, w której całe żądanie jest przetwarzane za pomocą trzech osobnych grup
+    klas:</p>
+<ul>
+    <li>Modele: <code>Calculator</code> - model obliczeń, <code>CalculatorModel</code> - model danych, <code>CalculatorViewModel</code>
+        - model widoku
+    </li>
+    <li>
+        Kontroler: <code>CalculatorController</code> - klasa kontrolera, która odbiera żądania
+    </li>
+    <li>
+        Widoki: <code>Views/Calculator/Result.cshtml</code> - widok kalkulatora z formularzem i wynikami obliczeń
+    </li>
+</ul>
+<p>Kliknij na poniższy przycisk, aby przejść do kalkulatora (metoda <code>Result</code> w klasie kontrolera)</p>
+<p></p>
+<a asp-action="Result" asp-controller="Calculator">Kalkulator</a>

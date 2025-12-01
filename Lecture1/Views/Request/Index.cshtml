@@ -1,0 +1,68 @@
+@using System.Reflection.Metadata.Ecma335
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<h2>Szczegóły żądania</h2>
+<p>Strona (plik <code>Views/Request/Index.cshtml</code>) wyświetla podstawowe informacje zawarte w żądaniu, posługująć się kontekstem (<code>Context</code>)</p>
+<p>Jednocześnie strona ta jest przykładem łamania wzorca MVC, gdyż plik cshtml pełni rolę widoku, modelu i kontrolera.</p>
+<p>Składowa <code>Request</code> kontekstu to żądanie</p>
+<p>Składowa <code>Response</code> kontekstu to odpowiedź</p>
+@* <p>&lt; &times; &divide; &minus; &plus;</p> *@
+<p>Widok oczekuje żądania z parametrami: a, b i  op</p>
+<p>Dodaj w pasku adresu na końcu url query <code>?a=3&b=4&op=add</code></p>
+<h3>Szczegóły żądania</h3>
+@foreach (var key in Context.Request.Query.Keys)
+{
+    <p>@key: @Context.Request.Query[key]</p>
+}
+<p>Metoda żądanie: @Context.Request.Method</p>
+<p>Ścieżka żądania: @Context.Request.Path</p>
+<p>Quey żądania: @Context.Request.QueryString</p>
+@{
+    if (!Context.Request.Query.ContainsKey("op"))
+    {
+        return;
+    }
+    
+    var op = Context.Request.Query["op"];
+    try
+    {
+        double a = double.Parse(@Context.Request.Query["a"]);
+        double b = double.Parse(@Context.Request.Query["b"]);
+        Func<double, double, double> add = (a, b) => a + b;
+        Dictionary<string, Func<double, double, double>> calc = new()
+        {
+            { "add", (a, b) => a + b },
+            { "sub", (a, b) => a - b },
+            { "mul", (a, b) => a * b },
+            { "div", (a, b) => a / b },
+        };
+        Dictionary<string, string> symbols = new()
+        {
+            {"add", "&plus;"},
+            {"sub", "&minus;"},
+            {"mul", "&times;"},
+            {"div", "&divide;"}
+            
+        };
+        if (!calc.ContainsKey(op))
+        {
+            Context.Response.StatusCode = 400;
+            <h3 class="text-danger">Niepoprawny operator!</h3>
+        }
+        else
+        {
+            var result = calc[op](a, b);
+            <h1>Kalkulator</h1>
+            <h2>
+                @a @Html.Raw(@symbols[op]) @b = @result
+            </h2>
+        }
+    }
+    catch (FormatException e)
+    {
+        Context.Response.StatusCode = 400;
+        <p>Niepoprawny format liczby!</p>
+    }
+}
