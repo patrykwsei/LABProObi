@@ -14,7 +14,6 @@ public class CalculatorViewModel
             { Operators.Div, "÷"}
         };
     [Required]
-    
     public double X { get; init; }
     [Required]
     public double Y { get; init; }
