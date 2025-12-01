@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Wykład 3</h1>
+</div>
+<h3>Projekt integrujący bazę danych z aplikacją w podejściu Database First.</h3>
+<p>Plik bazy należy pobrać ze strony: <a href="https://github.com/bbrumm/databasestar/blob/main/sample_databases/sample_db_movies/sqlite/movies.db">movies.db</a>
+  i zapisać w znanej lokalizacji.</p>
+<p>W pliku <code>appsettings.json</code> należy zmienić ścieżke do pliku bazy danych w kluczu <code>"ConnectionString"</code>.</p>
+<pre>
+<code>
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "MoviesDatabase": {
+    "ConnectionString": "data source=c:\\data\\movies.db"
+  }
+}    
+</code>
+</pre>
+<p>Model opisujący film ma tylko kilka wybranych atrybutów.</p>
+<p>W projekcie zdefiniowano dwie osobne klasy modelu: klasę encji <code>MovieEntity</code> oraz klasę widoku <code>MovieView</code>.</p>
+<p>Pierwsza definiuje strukturę wiersza tabeli i konfiguruje import z bazy danych.</p>
+<p>Druga konfiguruje sposób wyświetlania danych w widokach.</p>
+<p>W aplikacji nie ma możliwości usuwania filmów ze względu na związki z innymi tabelami.</p>
+<img src="img/movies_erd.png" width="800" alt="Diagram ERD bazy movies"/>
+<figure class="text-center">Diagram ERD bazy Movies</figure>
