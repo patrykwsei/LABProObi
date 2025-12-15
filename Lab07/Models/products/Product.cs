@@ -1,30 +1,29 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Lab07.models.movies;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Lab07.models.products
+
+namespace Lab07.Models.products;
+
+public class Product
 {
-    public class Product
-    {
-        [HiddenInput]
-        public int Id { get; set; }
+    [HiddenInput]
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = "Podaj nazwę produktu")]
-        [StringLength(100)]
-        public string Name { get; set; } = "";
+    [Required(ErrorMessage = "Podaj nazwę.")]
+    [StringLength(100, ErrorMessage = "Nazwa max 100 znaków.")]
+    public string Name { get; set; } = "";
 
-        [Range(0.01, 100000)]
-        public decimal Price { get; set; }
+    [Range(0.01, 1000000, ErrorMessage = "Cena musi być > 0.")]
+    public decimal Price { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime ProductionDate { get; set; }
+    [Required(ErrorMessage = "Podaj producenta.")]
+    [StringLength(100)]
+    public string Producer { get; set; } = "";
 
-        [StringLength(500)]
-        public string? Description { get; set; }
+    [DataType(DataType.Date)]
+    [Required(ErrorMessage = "Podaj datę produkcji.")]
+    public DateTime ProductionDate { get; set; } = DateTime.Today;
 
-        [Required]
-        public int ProducerId { get; set; }
-
-        public Producer? Producer { get; set; }
-    }
+    [StringLength(500, ErrorMessage = "Opis max 500 znaków.")]
+    public string? Description { get; set; }
 }

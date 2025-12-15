@@ -1,0 +1,26 @@
+@model Dictionary<int, Lab07.Models.products.Product>
+
+<h2>Lista produktów</h2>
+
+<a asp-action="Create" class="btn btn-success mb-2">Dodaj nowy</a>
+
+<table class="table">
+    <tr>
+        <th>Nazwa</th>
+        <th>Cena</th>
+        <th>Akcje</th>
+    </tr>
+
+    @foreach (var item in Model.Values)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,5 +1,4 @@
-using Lab07.models;
-using Lab07.models.movies;
+using Lab07.Models.products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lab07.models.products;

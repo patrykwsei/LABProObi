@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Lab07.Models.products;
 
 namespace Lab07.models.products
 {

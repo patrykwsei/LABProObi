@@ -1,0 +1,10 @@
+@model Lab07.Models.products.Product
+
+<h2>Szczegóły produktu</h2>
+
+<p><b>Nazwa:</b> @Model.Name</p>
+<p><b>Cena:</b> @Model.Price</p>
+<p><b>Data produkcji:</b> @Model.ProductionDate</p>
+<p><b>Opis:</b> @Model.Description</p>
+
+<a asp-action="Index">Powrót</a>
