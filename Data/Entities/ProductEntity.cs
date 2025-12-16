@@ -15,9 +15,8 @@ public class ProductEntity
     [Required]
     public decimal Price { get; set; }
 
-    [Required]
-    [MaxLength(80)]
-    public string Producer { get; set; } = "";
+    public int ProducerId { get; set; }
+    public ProducerEntity? Producer { get; set; }
 
     public DateTime ProductionDate { get; set; }
 

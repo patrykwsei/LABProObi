@@ -1,4 +1,5 @@
 @model Lab07.Models.products.Product
+@using Lab07.Models.products
 
 <h2>Dodaj produkt</h2>
 
@@ -7,25 +8,26 @@
 
     <div class="mb-2">
         <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
+        <input asp-for="Name" class="form-control"/>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
         <label asp-for="Price"></label>
-        <input asp-for="Price" class="form-control" />
+        <input asp-for="Price" class="form-control"/>
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
-        <label asp-for="Producer"></label>
-        <input asp-for="Producer" class="form-control" />
-        <span asp-validation-for="Producer" class="text-danger"></span>
+        <label asp-for="ProducerName"></label>
+        <input asp-for="ProducerName" class="form-control" />
+        <span asp-validation-for="ProducerName" class="text-danger"></span>
     </div>
+
 
     <div class="mb-2">
         <label asp-for="ProductionDate"></label>
-        <input asp-for="ProductionDate" class="form-control" type="date" />
+        <input asp-for="ProductionDate" type="date" class="form-control"/>
         <span asp-validation-for="ProductionDate" class="text-danger"></span>
     </div>
 
@@ -37,17 +39,10 @@
 
     <div class="mb-2">
         <label asp-for="Category"></label>
-        <select class="form-control"
-                asp-for="Category"
-                asp-items="@Html.GetEnumSelectList<Lab07.Models.products.ProductCategory>()">
-        </select>
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<ProductCategory>()" class="form-control"></select>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
 
-    <button class="btn btn-success" type="submit">Zapisz</button>
-    <a class="btn btn-secondary" asp-action="Index">Anuluj</a>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
 </form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

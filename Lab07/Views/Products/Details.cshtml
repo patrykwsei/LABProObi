@@ -1,10 +1,14 @@
 @model Lab07.Models.products.Product
 
-<h2>Szczegóły produktu</h2>
+<h2>Szczegóły</h2>
 
-<p><b>Nazwa:</b> @Model.Name</p>
-<p><b>Cena:</b> @Model.Price</p>
-<p><b>Data produkcji:</b> @Model.ProductionDate</p>
-<p><b>Opis:</b> @Model.Description</p>
+<table class="table">
+    <tr><th>Nazwa</th><td>@Model.Name</td></tr>
+    <tr><th>Cena</th><td>@Model.Price</td></tr>
+    <tr><th>Producent</th><td>@Model.ProducerName</td></tr>
+    <tr><th>Data produkcji</th><td>@Model.ProductionDate.ToShortDateString()</td></tr>
+    <tr><th>Opis</th><td>@Model.Description</td></tr>
+    <tr><th>Kategoria</th><td>@Model.Category</td></tr>
+</table>
 
-<a asp-action="Index">Powrót</a>
+<a asp-action="Index" class="btn btn-secondary">Powrót</a>

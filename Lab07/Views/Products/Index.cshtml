@@ -1,12 +1,18 @@
 @model List<Lab07.Models.products.Product>
+@using Lab07.Models.products
 
 <h2>Lista produktów</h2>
 
-<a class="btn btn-primary" asp-action="Create">Dodaj nowy</a>
+<a asp-action="Create" class="btn btn-primary mb-2">Dodaj nowy</a>
 
-@if (Model.Count > 0)
+@if (Model.Count == 0)
+{
+    <p>Brak produktów.</p>
+}
+else
 {
     <table class="table">
+        <thead>
         <tr>
             <th>Nazwa</th>
             <th>Cena</th>
@@ -14,13 +20,14 @@
             <th>Kategoria</th>
             <th>Akcje</th>
         </tr>
-
+        </thead>
+        <tbody>
         @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Price</td>
-                <td>@item.Producer</td>
+                <td>@item.ProducerName</td>
                 <td>@item.Category</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
@@ -29,5 +36,6 @@
                 </td>
             </tr>
         }
+        </tbody>
     </table>
 }

@@ -1,6 +1,6 @@
 using Data;
-using Lab07.models.movies;
 using Lab07.Models.products;
+using Lab07.models.movies;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lab07;
@@ -13,17 +13,15 @@ public class Program
 
         builder.Services.AddControllersWithViews();
 
-        // Movies (zostawiamy jak było)
         builder.Services.AddDbContext<MoviesContext>();
 
-        // Products DB (SQLite) - baza products.db obok uruchamianej aplikacji
+        var dbDir = Path.Combine(builder.Environment.ContentRootPath, "data");
+        Directory.CreateDirectory(dbDir);
+        var dbPath = Path.Combine(dbDir, "products.db");
+
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlite(builder.Configuration.GetConnectionString("ProductsDb")));
+            options.UseSqlite($"Data Source={dbPath}"));
 
-        // Time provider
-        builder.Services.AddSingleton<Lab07.Models.IDateTimeProvider, Lab07.Models.CurrentDateTimeProvider>();
-
-        // Product service -> EF (nie Memory)
         builder.Services.AddTransient<IProductService, EFProductService>();
 
         var app = builder.Build();

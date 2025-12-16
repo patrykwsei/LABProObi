@@ -1,11 +1,13 @@
 @model Lab07.Models.products.Product
+@using Lab07.Models.products
 
 <h2>Edytuj produkt</h2>
 
 <form asp-action="Edit" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Created" type="hidden" />
 
-    <input asp-for="Id" />
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-2">
         <label asp-for="Name"></label>
@@ -20,14 +22,15 @@
     </div>
 
     <div class="mb-2">
-        <label asp-for="Producer"></label>
-        <input asp-for="Producer" class="form-control"/>
-        <span asp-validation-for="Producer" class="text-danger"></span>
+        <label asp-for="ProducerName"></label>
+        <input asp-for="ProducerName" class="form-control" />
+        <span asp-validation-for="ProducerName" class="text-danger"></span>
     </div>
+
 
     <div class="mb-2">
         <label asp-for="ProductionDate"></label>
-        <input asp-for="ProductionDate" class="form-control" type="date"/>
+        <input asp-for="ProductionDate" type="date" class="form-control"/>
         <span asp-validation-for="ProductionDate" class="text-danger"></span>
     </div>
 
@@ -35,6 +38,12 @@
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="Category"></label>
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<ProductCategory>()" class="form-control"></select>
+        <span asp-validation-for="Category" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Zapisz</button>

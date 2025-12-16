@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Lab07.Models.products;
 
@@ -26,10 +27,15 @@ public class Product
     [Display(Name = "Cena")]
     public decimal Price { get; set; }
 
-    [Required(ErrorMessage = "Podaj producenta.")]
+    // FK do bazy (trzymamy, ale użytkownik wpisuje nazwę)
+    [HiddenInput]
+    [ValidateNever]
+    public int ProducerId { get; set; }
+
+    [Required(ErrorMessage = "Wpisz nazwę producenta.")]
     [StringLength(80)]
     [Display(Name = "Producent")]
-    public string Producer { get; set; } = "";
+    public string ProducerName { get; set; } = "";
 
     [DataType(DataType.Date)]
     [Display(Name = "Data produkcji")]

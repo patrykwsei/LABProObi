@@ -1,18 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Lab07.Models.products;
 
-namespace Lab07.models.products
+namespace Lab07.Models.products;
+
+public class Producer
 {
-    public class Producer
-    {
-        [HiddenInput]
-        public int Id { get; set; }
+    [HiddenInput]
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = "Podaj nazwę producenta")]
-        [StringLength(80)]
-        public string Name { get; set; } = "";
-
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-    }
+    [Required(ErrorMessage = "Podaj nazwę producenta.")]
+    [StringLength(80)]
+    [Display(Name = "Nazwa producenta")]
+    public string Name { get; set; } = "";
 }
