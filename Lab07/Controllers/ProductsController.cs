@@ -1,23 +1,26 @@
 using Lab07.Models.products;
 using Microsoft.AspNetCore.Mvc;
 
-
-
 namespace Lab07.Controllers;
 
 public class ProductsController : Controller
 {
-    private static Dictionary<int, Product> _products = new();
+    private readonly IProductService _service;
+
+    public ProductsController(IProductService service)
+    {
+        _service = service;
+    }
 
     public IActionResult Index()
     {
-        return View(_products);
+        return View(_service.GetAll());
     }
 
     [HttpGet]
     public IActionResult Create()
     {
-        return View();
+        return View(new Product());
     }
 
     [HttpPost]
@@ -26,29 +29,24 @@ public class ProductsController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        int id = _products.Count == 0 ? 1 : _products.Keys.Max() + 1;
-        model.Id = id;
-        _products.Add(id, model);
-
+        _service.Add(model);
         return RedirectToAction(nameof(Index));
     }
 
     [HttpGet]
     public IActionResult Details(int id)
     {
-        if (!_products.ContainsKey(id))
-            return NotFound();
-
-        return View(_products[id]);
+        var p = _service.GetById(id);
+        if (p == null) return NotFound();
+        return View(p);
     }
 
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        if (!_products.ContainsKey(id))
-            return NotFound();
-
-        return View(_products[id]);
+        var p = _service.GetById(id);
+        if (p == null) return NotFound();
+        return View(p);
     }
 
     [HttpPost]
@@ -57,23 +55,24 @@ public class ProductsController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        _products[model.Id] = model;
+        if (!_service.Update(model))
+            return NotFound();
+
         return RedirectToAction(nameof(Index));
     }
 
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        if (!_products.ContainsKey(id))
-            return NotFound();
-
-        return View(_products[id]);
+        var p = _service.GetById(id);
+        if (p == null) return NotFound();
+        return View(p);
     }
 
     [HttpPost]
     public IActionResult DeleteConfirmed(int id)
     {
-        _products.Remove(id);
+        _service.Delete(id);
         return RedirectToAction(nameof(Index));
     }
 }

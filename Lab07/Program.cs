@@ -12,6 +12,9 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddDbContext<MoviesContext>();
+        builder.Services.AddSingleton<Lab07.Models.IDateTimeProvider, Lab07.Models.CurrentDateTimeProvider>();
+        builder.Services.AddSingleton<Lab07.Models.products.IProductService, Lab07.Models.products.MemoryProductService>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

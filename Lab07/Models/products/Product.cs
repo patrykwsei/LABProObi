@@ -1,8 +1,15 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace Lab07.Models.products;
+
+public enum ProductCategory
+{
+    [Display(Name = "Spożywcze")] Food = 1,
+    [Display(Name = "Chemia")] Chemistry = 2,
+    [Display(Name = "Elektronika")] Electronics = 3,
+    [Display(Name = "Inne")] Other = 4
+}
 
 public class Product
 {
@@ -10,20 +17,31 @@ public class Product
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Podaj nazwę.")]
-    [StringLength(100, ErrorMessage = "Nazwa max 100 znaków.")]
+    [StringLength(80)]
+    [Display(Name = "Nazwa")]
     public string Name { get; set; } = "";
 
-    [Range(0.01, 1000000, ErrorMessage = "Cena musi być > 0.")]
+    [Required(ErrorMessage = "Podaj cenę.")]
+    [Range(0.01, 1_000_000, ErrorMessage = "Cena musi być > 0.")]
+    [Display(Name = "Cena")]
     public decimal Price { get; set; }
 
     [Required(ErrorMessage = "Podaj producenta.")]
-    [StringLength(100)]
+    [StringLength(80)]
+    [Display(Name = "Producent")]
     public string Producer { get; set; } = "";
 
     [DataType(DataType.Date)]
-    [Required(ErrorMessage = "Podaj datę produkcji.")]
+    [Display(Name = "Data produkcji")]
     public DateTime ProductionDate { get; set; } = DateTime.Today;
 
-    [StringLength(500, ErrorMessage = "Opis max 500 znaków.")]
+    [StringLength(500)]
+    [Display(Name = "Opis")]
     public string? Description { get; set; }
+
+    [Display(Name = "Kategoria")]
+    public ProductCategory Category { get; set; } = ProductCategory.Other;
+
+    [HiddenInput]
+    public DateTime Created { get; set; }
 }
