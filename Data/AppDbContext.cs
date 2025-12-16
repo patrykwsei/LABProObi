@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ProducerEntity>().HasData(
             new ProducerEntity { Id = 1, Name = "Brak" },
             new ProducerEntity { Id = 2, Name = "Janex" },
-            new ProducerEntity { Id = 3, Name = "Marcin" }
+            new ProducerEntity { Id = 3, Name = "Samsung" }
         );
 
         base.OnModelCreating(modelBuilder);

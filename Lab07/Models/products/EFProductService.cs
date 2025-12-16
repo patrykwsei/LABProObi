@@ -40,7 +40,7 @@ public class EFProductService : IProductService
 
         var entity = ProductMapper.ToEntity(model);
         entity.ProducerId = producer.Id;
-        entity.Created = _timeProvider.Now(); // <- TU był "method group" jak brakowało ()
+        entity.Created = _timeProvider.Now(); 
 
         _context.Products.Add(entity);
         _context.SaveChanges();

@@ -43,7 +43,7 @@ public class MemoryProductService : IProductService
             Category = model.Category,
             ProducerId = producerId,
             ProducerName = _producers[producerId],
-            Created = _timeProvider.Now() // <- TU też był "method group" jak brakowało ()
+            Created = _timeProvider.Now()
         };
 
         _products[p.Id] = p;

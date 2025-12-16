@@ -27,7 +27,6 @@ public class Product
     [Display(Name = "Cena")]
     public decimal Price { get; set; }
 
-    // FK do bazy (trzymamy, ale użytkownik wpisuje nazwę)
     [HiddenInput]
     [ValidateNever]
     public int ProducerId { get; set; }
