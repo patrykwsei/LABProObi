@@ -22,28 +22,23 @@ public class MemoryProductService : IProductService
         return product.Id;
     }
 
-    public bool Delete(int id)
+    public void Delete(int id)
     {
-        return _items.Remove(id);
+        _items.Remove(id);
     }
 
-    public bool Update(Product product)
+    public void Update(Product product)
     {
-        if (!_items.ContainsKey(product.Id))
-            return false;
-
-        // Created zostawiamy jak było (żeby nie zmieniać historii)
-        product.Created = _items[product.Id].Created;
-        _items[product.Id] = product;
-        return true;
+        if (_items.ContainsKey(product.Id))
+            _items[product.Id] = product;
     }
 
-    public List<Product> GetAll()
+    public List<Product> FindAll()
     {
-        return _items.Values.OrderBy(p => p.Id).ToList();
+        return _items.Values.ToList();
     }
 
-    public Product? GetById(int id)
+    public Product? FindById(int id)
     {
         return _items.TryGetValue(id, out var p) ? p : null;
     }

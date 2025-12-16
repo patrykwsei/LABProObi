@@ -14,7 +14,7 @@ public class ProductsController : Controller
 
     public IActionResult Index()
     {
-        return View(_service.GetAll());
+        return View(_service.FindAll());
     }
 
     [HttpGet]
@@ -26,8 +26,7 @@ public class ProductsController : Controller
     [HttpPost]
     public IActionResult Create(Product model)
     {
-        if (!ModelState.IsValid)
-            return View(model);
+        if (!ModelState.IsValid) return View(model);
 
         _service.Add(model);
         return RedirectToAction(nameof(Index));
@@ -36,7 +35,7 @@ public class ProductsController : Controller
     [HttpGet]
     public IActionResult Details(int id)
     {
-        var p = _service.GetById(id);
+        var p = _service.FindById(id);
         if (p == null) return NotFound();
         return View(p);
     }
@@ -44,7 +43,7 @@ public class ProductsController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var p = _service.GetById(id);
+        var p = _service.FindById(id);
         if (p == null) return NotFound();
         return View(p);
     }
@@ -52,19 +51,16 @@ public class ProductsController : Controller
     [HttpPost]
     public IActionResult Edit(Product model)
     {
-        if (!ModelState.IsValid)
-            return View(model);
+        if (!ModelState.IsValid) return View(model);
 
-        if (!_service.Update(model))
-            return NotFound();
-
+        _service.Update(model);
         return RedirectToAction(nameof(Index));
     }
 
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        var p = _service.GetById(id);
+        var p = _service.FindById(id);
         if (p == null) return NotFound();
         return View(p);
     }

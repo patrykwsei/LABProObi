@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture8", "Lecture8\Lectur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture4", "Lecture4\Lecture4.csproj", "{24C31279-3296-4EC1-9515-EB4AB7E4DE40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{48ADEFAE-99DA-406C-87C6-8C3DBF1D63F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{24C31279-3296-4EC1-9515-EB4AB7E4DE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C31279-3296-4EC1-9515-EB4AB7E4DE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C31279-3296-4EC1-9515-EB4AB7E4DE40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48ADEFAE-99DA-406C-87C6-8C3DBF1D63F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48ADEFAE-99DA-406C-87C6-8C3DBF1D63F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48ADEFAE-99DA-406C-87C6-8C3DBF1D63F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48ADEFAE-99DA-406C-87C6-8C3DBF1D63F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
