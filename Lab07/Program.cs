@@ -20,10 +20,17 @@ public class Program
             options.UseSqlite(builder.Configuration.GetConnectionString("ProductsDb")));
 
         builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
-
         builder.Services.AddTransient<IProductService, EFProductService>();
 
         var app = builder.Build();
+
+        // >>> TO DODANE: robi migracje automatycznie i zakłada tabele
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            db.Database.Migrate();
+        }
+        // <<<
 
         if (!app.Environment.IsDevelopment())
         {
@@ -33,9 +40,7 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.UseAuthorization();
 
         app.MapControllerRoute(
