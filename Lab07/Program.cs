@@ -1,6 +1,7 @@
 using Data;
-using Lab07.Models.products;
 using Lab07.models.movies;
+using Lab07.Models;
+using Lab07.Models.products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lab07;
@@ -15,12 +16,10 @@ public class Program
 
         builder.Services.AddDbContext<MoviesContext>();
 
-        var dbDir = Path.Combine(builder.Environment.ContentRootPath, "data");
-        Directory.CreateDirectory(dbDir);
-        var dbPath = Path.Combine(dbDir, "products.db");
-
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlite($"Data Source={dbPath}"));
+            options.UseSqlite(builder.Configuration.GetConnectionString("ProductsDb")));
+
+        builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
         builder.Services.AddTransient<IProductService, EFProductService>();
 
@@ -33,14 +32,15 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
         app.UseRouting();
+
         app.UseAuthorization();
 
-        app.MapStaticAssets();
         app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-            .WithStaticAssets();
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
     }
