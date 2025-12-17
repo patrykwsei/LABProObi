@@ -24,14 +24,11 @@ public class Program
 
         var app = builder.Build();
 
-        // >>> TO DODANE: robi migracje automatycznie i zakłada tabele
         using (var scope = app.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             db.Database.Migrate();
         }
-        // <<<
-
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Home/Error");
